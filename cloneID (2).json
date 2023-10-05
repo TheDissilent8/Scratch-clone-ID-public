@@ -1,0 +1,61 @@
+{
+  "collapsed": true,
+  "extID": "cloneID",
+  "extName": "cloneID",
+  "color1Pick": false,
+  "color2Pick": false,
+  "color1": "#0FBD8C",
+  "color2": "#0DA57A",
+  "indexJS": null,
+  "menuIcon": null,
+  "blockIcon": null,
+  "editBlockID": "set clone variable",
+  "blocks": [
+    {
+      "opcode": "clone X",
+      "svg": "<svg id=\"src\" xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"40\" >\n    %3Cg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20data-id%3D%22n0JKi2a%7D%5B%60IWo%3DPUsG4Z%22%20class%3D%22blocklyDraggable%20blocklySelected%22%20data-shapes%3D%22reporter%20round%22%3E%3Cpath%20class%3D%22blocklyPath%20blocklyBlockBackground%22%20stroke%3D%22%23FF3355%22%20fill%3D%22%23FF6680%22%20fill-opacity%3D%221%22%20d%3D%22m%200%2C0%20m%2020%2C0%20H%2080%20a%2020%2020%200%200%201%200%2040%20H%2020%20a%2020%2020%200%200%201%200%20-40%20z%22%2F%3E%3Cg%20data-argument-type%3D%22text%22%20class%3D%22blocklyEditableText%22%20transform%3D%22translate(12%2C%204)%20%22%20style%3D%22cursor%3A%20text%3B%22%3E%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%2276%22%20height%3D%2232%22%20fill%3D%22%23FF3355%22%2F%3E%3Ctext%20class%3D%22blocklyText%20blocklyEditableLabel%22%20x%3D%2238%22%20y%3D%2218%22%20dominant-baseline%3D%22middle%22%20dy%3D%220%22%20text-anchor%3D%22middle%22%3Eclone%C2%A0X%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E\n    </svg>",
+      "msg": "clone X",
+      "args": [],
+      "mutationText": "<xml><mutation xmlns=\"http://www.w3.org/1999/xhtml\" generateshadows=\"true\" proccode=\"clone X\" argumentids=\"[]\" argumentnames=\"[]\" argumentdefaults=\"[]\" warp=\"false\"></mutation></xml>",
+      "type": "output",
+      "script": "class CloneXPositionExtension {\n  constructor(runtime) {\n    this.runtime = runtime;\n  }\n\n  getCloneXPosition() {\n    // Get the current sprite's clone's X position\n    const sprite = this.runtime.getSpriteTarget();\n    if (sprite.isClone) {\n      return sprite.x;\n    }\n    return 0; // Return 0 if not a clone\n  }\n}\n\nScratch.extensions.register(new CloneXPositionExtension());\n"
+    },
+    {
+      "opcode": "clone Y",
+      "svg": "<svg id=\"src\" xmlns=\"http://www.w3.org/2000/svg\" width=\"104\" height=\"40\" >\n    %3Cg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20data-id%3D%22*eU0_X%3DD5p4YN%3ACIfsE.%22%20class%3D%22blocklyDraggable%20blocklySelected%22%20data-shapes%3D%22reporter%20round%22%3E%3Cpath%20class%3D%22blocklyPath%20blocklyBlockBackground%22%20stroke%3D%22%23FF3355%22%20fill%3D%22%23FF6680%22%20fill-opacity%3D%221%22%20d%3D%22m%200%2C0%20m%2020%2C0%20H%2084%20a%2020%2020%200%200%201%200%2040%20H%2020%20a%2020%2020%200%200%201%200%20-40%20z%22%2F%3E%3Cg%20data-argument-type%3D%22text%22%20class%3D%22blocklyEditableText%22%20transform%3D%22translate(12%2C%204)%20%22%20style%3D%22cursor%3A%20text%3B%22%3E%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%2280%22%20height%3D%2232%22%20fill%3D%22%23FF3355%22%2F%3E%3Ctext%20class%3D%22blocklyText%20blocklyEditableLabel%22%20x%3D%2240%22%20y%3D%2218%22%20dominant-baseline%3D%22middle%22%20dy%3D%220%22%20text-anchor%3D%22middle%22%3EClone%C2%A0Y%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E\n    </svg>",
+      "msg": "Clone Y",
+      "args": [],
+      "mutationText": "<xml><mutation xmlns=\"http://www.w3.org/1999/xhtml\" generateshadows=\"true\" proccode=\"Clone Y\" argumentids=\"[]\" argumentnames=\"[]\" argumentdefaults=\"[]\" warp=\"false\"></mutation></xml>",
+      "type": "output",
+      "script": "class CloneYPositionExtension {\n  constructor(runtime) {\n    this.runtime = runtime;\n  }\n\n  getCloneYPosition() {\n    // Get the current sprite's clone's Y position\n    const sprite = this.runtime.getSpriteTarget();\n    if (sprite.isClone) {\n      return sprite.y;\n    }\n    return 0; // Return 0 if not a clone\n  }\n}\n\nScratch.extensions.register(new CloneYPositionExtension());"
+    },
+    {
+      "opcode": "set clone variable",
+      "svg": "<svg id=\"src\" xmlns=\"http://www.w3.org/2000/svg\" width=\"251\" height=\"56\" >\n    %3Cg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20data-id%3D%22.Z%5E.g%2BX_MP%7D%5BEjbvX~jL%22%20class%3D%22blocklyDraggable%22%20data-shapes%3D%22stack%22%3E%3Cpath%20class%3D%22blocklyPath%20blocklyBlockBackground%22%20stroke%3D%22%23FF3355%22%20fill%3D%22%23FF6680%22%20fill-opacity%3D%221%22%20d%3D%22m%200%2C4%20A%204%2C4%200%200%2C1%204%2C0%20H%2012%20c%202%2C0%203%2C1%204%2C2%20l%204%2C4%20c%201%2C1%202%2C2%204%2C2%20h%2012%20c%202%2C0%203%2C-1%204%2C-2%20l%204%2C-4%20c%201%2C-1%202%2C-2%204%2C-2%20H%20247%20a%204%2C4%200%200%2C1%204%2C4%20v%2040%20%20a%204%2C4%200%200%2C1%20-4%2C4%20H%2048%20%20%20c%20-2%2C0%20-3%2C1%20-4%2C2%20l%20-4%2C4%20c%20-1%2C1%20-2%2C2%20-4%2C2%20h%20-12%20c%20-2%2C0%20-3%2C-1%20-4%2C-2%20l%20-4%2C-4%20c%20-1%2C-1%20-2%2C-2%20-4%2C-2%20H%204%20a%204%2C4%200%200%2C1%20-4%2C-4%20z%22%2F%3E%3Cg%20data-id%3D%22P!AyG-O%23%5BeydmIQzF.y%3B%22%20data-argument-type%3D%22text%22%20data-shapes%3D%22argument%20round%22%20transform%3D%22translate(99%2C8)%22%3E%3Cpath%20class%3D%22blocklyPath%20blocklyBlockBackground%22%20stroke%3D%22%23FF3355%22%20fill%3D%22%23FFFFFF%22%20fill-opacity%3D%221%22%20d%3D%22m%200%2C0%20m%2016%2C0%20H%2024%20a%2016%2016%200%200%201%200%2032%20H%2016%20a%2016%2016%200%200%201%200%20-32%20z%22%2F%3E%3Cg%20class%3D%22blocklyEditableText%22%20transform%3D%22translate(8%2C%200)%20%22%20style%3D%22cursor%3A%20text%3B%22%3E%3Ctext%20class%3D%22blocklyText%22%20x%3D%2212%22%20y%3D%2218%22%20dominant-baseline%3D%22middle%22%20dy%3D%220%22%20text-anchor%3D%22middle%22%3E%C2%A0%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3Cg%20data-argument-type%3D%22text%22%20class%3D%22blocklyEditableText%22%20style%3D%22cursor%3A%20text%3B%22%20transform%3D%22translate(48%2C%208)%20%22%3E%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%2243%22%20height%3D%2232%22%20fill%3D%22%23FF3355%22%2F%3E%3Ctext%20class%3D%22blocklyText%20blocklyEditableLabel%22%20x%3D%2221.5%22%20y%3D%2218%22%20dominant-baseline%3D%22middle%22%20dy%3D%220%22%20text-anchor%3D%22middle%22%3Eset%3C%2Ftext%3E%3C%2Fg%3E%3Cpath%20class%3D%22blocklyPath%22%20style%3D%22visibility%3A%20hidden%22%20d%3D%22%22%20fill%3D%22%23FF3355%22%2F%3E%3Cg%20data-argument-type%3D%22text%22%20class%3D%22blocklyEditableText%22%20style%3D%22cursor%3A%20text%3B%22%20transform%3D%22translate(147%2C%208)%20%22%3E%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%2296%22%20height%3D%2232%22%20fill%3D%22%23FF3355%22%2F%3E%3Ctext%20class%3D%22blocklyText%20blocklyEditableLabel%22%20x%3D%2248%22%20y%3D%2218%22%20dominant-baseline%3D%22middle%22%20dy%3D%220%22%20text-anchor%3D%22middle%22%3Efor%C2%A0a%C2%A0clone%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E\n    </svg>",
+      "msg": "set %1 for a clone",
+      "args": [
+        {
+          "argType": "STRING",
+          "placeholder": "",
+          "shadowType": "text",
+          "fieldType": "TEXT",
+          "json": {
+            "type": "input_value",
+            "name": ""
+          }
+        }
+      ],
+      "mutationText": "<xml><mutation xmlns=\"http://www.w3.org/1999/xhtml\" generateshadows=\"true\" proccode=\"set %s for a clone\" argumentids=\"[&quot;3Vb,fQC/(AVL.6jp$%1x&quot;]\" argumentnames=\"[&quot;&quot;]\" argumentdefaults=\"[&quot;false&quot;,&quot;&quot;,&quot;&quot;]\" warp=\"false\"></mutation></xml>",
+      "type": "func",
+      "script": "class CloneVariablesExtension {\n  constructor(runtime) {\n    this.runtime = runtime;\n    this.cloneVariables = {}; // Object to store clone-specific variables\n  }\n\n  setCloneVariable({ variable, value }) {\n    const cloneID = this.runtime.currentCloneId; // Get the ID of the current clone\n    if (!this.cloneVariables[cloneID]) {\n      this.cloneVariables[cloneID] = {};\n    }\n    this.cloneVariables[cloneID][variable] = value; // Store the clone-specific variable\n  }\n\n  getCloneVariable({ variable }) {\n    const cloneID = this.runtime.currentCloneId; // Get the ID of the current clone\n    if (this.cloneVariables[cloneID] && this.cloneVariables[cloneID][variable] !== undefined) {\n      return this.cloneVariables[cloneID][variable]; // Retrieve the clone-specific variable\n    }\n    return 0; // Return 0 if the variable doesn't exist for the clone\n  }\n}\n\nScratch.extensions.register(new CloneVariablesExtension());"
+    }
+  ],
+  "menus": [],
+  "addBlockType": "func",
+  "showMutation": false,
+  "blockScript": null,
+  "genOption": [],
+  "genHeadScript": null,
+  "blockGenerator": null,
+  "isShowCodePreview": false
+}
