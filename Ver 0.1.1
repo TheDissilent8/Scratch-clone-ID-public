@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clone ID Extension</title>
+</head>
+<body>
+  <button onclick="getCloneID()">Get Clone ID</button>
+
+  <script>
+    function getCloneID() {
+      // Communicate with the Scratch project using postMessage
+      window.parent.postMessage({ type: 'extension', action: 'getCloneID' }, '*');
+    }
+  </script>
+</body>
+</html>
+
+// create by scratch3-extension generator
+const ArgumentType = Scratch.ArgumentType;
+const BlockType = Scratch.BlockType;
+const formatMessage = Scratch.formatMessage;
+const log = Scratch.log;
+
+const menuIconURI = null;
+const blockIconURI = null;
+
+class cloneID{
+  constructor (runtime){
+    this.runtime = runtime;
+    // communication related
+    this.comm = runtime.ioDevices.comm;
+    this.session = null;
+    this.runtime.registerPeripheralExtension('cloneID', this);
+    // session callbacks
+    this.reporter = null;
+    this.onmessage = this.onmessage.bind(this);
+    this.onclose = this.onclose.bind(this);
+    this.write = this.write.bind(this);
+    // string op
+    this.decoder = new TextDecoder();
+    this.lineBuffer = '';
+  }
+
+  onclose (){
+    this.session = null;
+  }
+
+  write (data, parser = null){
+    if (this.session){
+      return new Promise(resolve => {
+        if (parser){
+          this.reporter = {
+            parser,
+            resolve
+          }
+        }
+        this.session.write(data);
+      })
+    }
+  }
+
+  onmessage (data){
+    const dataStr = this.decoder.decode(data);
+    this.lineBuffer += dataStr;
+    if (this.lineBuffer.indexOf('\n') !== -1){
+      const lines = this.lineBuffer.split('\n');
+      this.lineBuffer = lines.pop();
+      for (const l of lines){
+        if (this.reporter){
+          const {parser, resolve} = this.reporter;
+          resolve(parser(l));
+        };
+      }
+    }
+  }
+
+  scan (){
+    this.comm.getDeviceList().then(result => {
+        this.runtime.emit(this.runtime.constructor.PERIPHERAL_LIST_UPDATE, result);
+    });
+  }
+
+  getInfo (){
+    return {
+      id: 'cloneID',
+      name: 'cloneID',
+      color1: '#0FBD8C',
+      color2: '#0DA57A',
+      menuIconURI: menuIconURI,
+      blockIconURI: blockIconURI,
+      blocks: [
+        {
+          opcode: 'clone X',
+          blockType: BlockType.REPORTER,
+          text: 'clone X'
+        },
+        {
+          opcode: 'clone Y',
+          blockType: BlockType.REPORTER,
+          text: 'Clone Y'
+        },
+        {
+          opcode: 'set clone variable',
+          blockType: BlockType.COMMAND,
+          arguments: {
+            : {
+              type: ArgumentType.STRING
+            }
+          },
+          text: 'set [] for a clone'
+        }
+      ]
+    }
+  }
+
+{
+  "name": "Clone X Position",
+  "extensionId": "cloneXPosition",
+  "blocks": [
+    {
+      "opcode": "getCloneXPosition",
+      "blockType": "reporter",
+      "text": "clone's X position"
+    }
+  ]
+}
+
+class CloneXPositionExtension {
+  constructor(runtime) {
+    this.runtime = runtime;
+  }
+
+  getCloneXPosition() {
+    // Get the current sprite's clone's X position
+    const sprite = this.runtime.getSpriteTarget();
+    if (sprite.isClone) {
+      return sprite.x;
+    }
+    return 0; // Return 0 if not a clone
+  }
+}
+
+Scratch.extensions.register(new CloneXPositionExtension());
+
+{
+  "name": "Clone Y Position",
+  "extensionId": "cloneYPosition",
+  "blocks": [
+    {
+      "opcode": "getCloneYPosition",
+      "blockType": "reporter",
+      "text": "clone's Y position"
+    }
+  ]
+}
+
+
+class CloneYPositionExtension {
+  constructor(runtime) {
+    this.runtime = runtime;
+  }
+
+  getCloneYPosition() {
+    // Get the current sprite's clone's Y position
+    const sprite = this.runtime.getSpriteTarget();
+    if (sprite.isClone) {
+      return sprite.y;
+    }
+    return 0; // Return 0 if not a clone
+  }
+}
+
+Scratch.extensions.register(new CloneYPositionExtension());
+{
+  "name": "Clone Variables",
+  "extensionId": "cloneVariables",
+  "blocks": [
+    {
+      "opcode": "setCloneVariable",
+      "blockType": "command",
+      "text": "set [variable] to [value] for this clone",
+      "arguments": {
+        "variable": {
+          "type": "string",
+          "defaultValue": "myVariable"
+        },
+        "value": {
+          "type": "any",
+          "defaultValue": 0
+        }
+      }
+    },
+    {
+      "opcode": "getCloneVariable",
+      "blockType": "reporter",
+      "text": "get [variable] for this clone",
+      "arguments": {
+        "variable": {
+          "type": "string",
+          "defaultValue": "myVariable"
+        }
+      }
+    }
+  ]
+}
+
+class CloneVariablesExtension {
+  constructor(runtime) {
+    this.runtime = runtime;
+    this.cloneVariables = {}; // Object to store clone-specific variables
+  }
+
+  setCloneVariable({ variable, value }) {
+    const cloneID = this.runtime.currentCloneId; // Get the ID of the current clone
+    if (!this.cloneVariables[cloneID]) {
+      this.cloneVariables[cloneID] = {};
+    }
+    this.cloneVariables[cloneID][variable] = value; // Store the clone-specific variable
+  }
+
+  getCloneVariable({ variable }) {
+    const cloneID = this.runtime.currentCloneId; // Get the ID of the current clone
+    if (this.cloneVariables[cloneID] && this.cloneVariables[cloneID][variable] !== undefined) {
+      return this.cloneVariables[cloneID][variable]; // Retrieve the clone-specific variable
+    }
+    return 0; // Return 0 if the variable doesn't exist for the clone
+  }
+}
+
+Scratch.extensions.register(new CloneVariablesExtension());
+}
+
+module.exports = cloneID;
